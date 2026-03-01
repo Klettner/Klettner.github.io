@@ -15,7 +15,7 @@ const projects = (await getCollection('projects')).sort(
 		{projects.map(async (project) => {
 			const { Content } = await project.render();
 			return (
-				<div class="card">
+				<div class="card" id={project.slug}>
 					{project.data.image && <img src={project.data.image} alt={project.data.title} class="project-image" />}
 					<div class="card-header">
 						<h3>{project.data.title}</h3>

@@ -28,12 +28,14 @@ const achievements = (await getCollection('achievements')).sort(
 		<div class="grid">
 			{projects.map((project) => (
 				<div class="card">
-					{project.data.image && <img src={project.data.image} alt={project.data.title} class="project-image" />}
-					<h3>{project.data.title}</h3>
-					<p>{project.data.description}</p>
-					<div class="tags">
-						{project.data.tags?.map(tag => <span class="tag">{tag}</span>)}
-					</div>
+					<a href={`/projects/#${project.slug}`} class="card-link" aria-label={`View details for ${project.data.title}`}>
+						{project.data.image && <img src={project.data.image} alt={project.data.title} class="project-image" />}
+						<h3>{project.data.title}</h3>
+						<p>{project.data.description}</p>
+						<div class="tags">
+							{project.data.tags?.map(tag => <span class="tag">{tag}</span>)}
+						</div>
+					</a>
 					{project.data.link && <a href={project.data.link} target="_blank" class="link">View on GitHub &rarr;</a>}
 				</div>
 			))}
@@ -118,12 +120,19 @@ const achievements = (await getCollection('achievements')).sort(
 		border-radius: 8px;
 		transition: transform 0.2s, box-shadow 0.2s;
 		background: #fafafa;
+		position: relative;
 	}
 
 	.card:hover {
 		transform: translateY(-4px);
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 		background: #ffffff;
+	}
+
+	.card-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
 	}
 
 	.project-image {
