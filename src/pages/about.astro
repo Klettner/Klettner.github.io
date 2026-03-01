@@ -1,0 +1,138 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const experience = (await getCollection('experience')).sort(
+	(a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
+);
+
+const skills = [
+	"Java", "TypeScript", "React", "Dart", "Flutter", "Swift", "GraphQL", "MongoDB", "SQL", "Git", "Docker", "Kubernetes", "Chaos Engineering"
+];
+---
+
+<Layout title="About | Manuel Klettner">
+	<h1>About Me</h1>
+	
+	<div class="content">
+		<p>I am an Information Systems student at the Technical University of Munich with a deep interest in software engineering and distributed systems. My academic journey at TUM has provided me with a strong foundation in both the technical and business aspects of technology.</p>
+		
+		<p>Beyond my studies, I am passionate about travelling and experiencing different cultures, which has broadened my perspective and approach to problem-solving.</p>
+
+		<h2>Practical Experience</h2>
+		<div class="experience-list">
+			{experience.map((exp) => (
+				<div class="exp-item">
+					<div class="exp-header">
+						<div class="exp-title-company">
+							<h3>{exp.data.title}</h3>
+							<span class="company">{exp.data.company}</span>
+						</div>
+						<span class="period">
+							{exp.data.startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })} - 
+							{exp.data.current ? 'Present' : exp.data.endDate?.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
+						</span>
+					</div>
+					<p>{exp.data.description}</p>
+				</div>
+			))}
+		</div>
+
+		<h2>IT Skills</h2>
+		<ul class="skills-grid">
+			{skills.map(skill => <li>{skill}</li>)}
+		</ul>
+
+		<h2>Languages</h2>
+		<div class="languages">
+			<p><strong>English:</strong> Native/C1 Proficient</p>
+			<p><strong>German:</strong> Native</p>
+			<p><strong>French:</strong> Basic/Intermediate</p>
+			<p><strong>Chinese:</strong> Basic</p>
+		</div>
+
+		<h2>Contact</h2>
+		<p>Feel free to reach out to me.</p>
+		<ul class="contact-links">
+			<li>LinkedIn: <a href="https://www.linkedin.com/in/klettner" target="_blank">linkedin.com/in/klettner</a></li>
+			<li>GitHub: <a href="https://github.com/Klettner" target="_blank">github.com/Klettner</a></li>
+		</ul>
+	</div>
+</Layout>
+
+<style>
+	.content {
+		max-width: 100%;
+	}
+
+	.experience-list {
+		margin: 2rem 0;
+	}
+
+	.exp-item {
+		margin-bottom: 2.5rem;
+	}
+
+	.exp-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: 0.5rem;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.exp-header h3 {
+		margin: 0;
+		font-size: 1.25rem;
+	}
+
+	.company {
+		font-weight: 600;
+		color: var(--accent-color);
+		display: block;
+	}
+
+	.period {
+		font-size: 0.9rem;
+		color: var(--secondary-text);
+		font-variant-numeric: tabular-nums;
+	}
+
+	.skills-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+		gap: 0.75rem;
+		list-style: none;
+		padding: 0;
+		margin: 1.5rem 0 3rem;
+	}
+
+	.skills-grid li {
+		background: #f8f8f8;
+		padding: 0.5rem 1rem;
+		border-radius: 4px;
+		font-size: 0.9rem;
+		text-align: center;
+		border: 1px solid var(--border-color);
+	}
+
+	.languages {
+		margin-top: 1rem;
+		margin-bottom: 3rem;
+	}
+
+	.languages p {
+		margin: 0.25rem 0;
+	}
+
+	.contact-links {
+		list-style: none;
+		padding: 0;
+		margin-top: 1rem;
+	}
+
+	.contact-links li {
+		margin-bottom: 0.5rem;
+	}
+</style>
