@@ -7,24 +7,24 @@ const experience = (await getCollection('experience')).sort(
 );
 
 const skills = [
-	"Java", "TypeScript", "React", "Dart", "Flutter", "Swift", "GraphQL", "MongoDB", "SQL", "Git", "Docker", "Kubernetes", "Chaos Engineering"
+	"Java", "TypeScript", "JavaScript", "Python", "C#", "ASP.NET Core", "React", "Flutter", "Swift", "GraphQL", "Node.js", "MongoDB", "SQL", "Git", "Docker", "Kubernetes", "Helm", "OpenShift", "Istio", "Grafana", "Chaos Engineering", "Artificial Intelligence (AI)", "Large Language Models (LLM)", "Google Cloud Platform (GCP)", "Microsoft Azure", "Agile Methodologies", "Scrum"
 ];
 ---
 
 <Layout title="About | Manuel Klettner">
 	<h1>About Me</h1>
-	
+
 	<div class="content">
-		<p>I am an Information Systems student at the Technical University of Munich with a deep interest in software engineering and distributed systems. My academic journey at TUM has provided me with a strong foundation in both the technical and business aspects of technology.</p>
-		
-		<p>Beyond my studies, I am passionate about travelling and experiencing different cultures, which has broadened my perspective and approach to problem-solving.</p>
+		<p>I am a Software Engineer at <strong>Rohde & Schwarz</strong> with a focus on building robust, scalable, and innovative digital solutions. I hold a Master of Science in Information Systems from the Technical University of Munich (TUM), where I graduated with distinction.</p>
+
+		<p>My expertise spans across cloud-native architectures, DevOps and the emerging field of Large Language Models (LLMs). I am driven by the challenge of solving complex problems through elegant software design.</p>
 
 		<h2>Practical Experience</h2>
 		<div class="experience-list">
-			{experience.map((exp) => (
+			{experience.map(exp => (
 				<div class="exp-item">
 					<div class="exp-header">
-						<div class="exp-title-company">
+						<div>
 							<h3>{exp.data.title}</h3>
 							<span class="company">{exp.data.company}</span>
 						</div>
@@ -38,6 +38,30 @@ const skills = [
 			))}
 		</div>
 
+		<h2>Education</h2>
+		<div class="education-list">
+			<div class="exp-item">
+				<div class="exp-header">
+					<div>
+						<h3>Master of Science, Information Systems</h3>
+						<span class="company">Technical University of Munich</span>
+					</div>
+					<span class="period">2022 - 2023</span>
+				</div>
+				<p>Thesis: Augmenting Knowledge-Based Conversational Search Systems With Large Language Models (Grade: 1.0)</p>
+			</div>
+			<div class="exp-item">
+				<div class="exp-header">
+					<div>
+						<h3>Bachelor of Science, Information Systems</h3>
+						<span class="company">Technical University of Munich</span>
+					</div>
+					<span class="period">2018 - 2022</span>
+				</div>
+				<p>Among the top 9% in field of study. Thesis: Context-sensitive Requirements Search in Natural Language Specifications (Grade: 1.0)</p>
+			</div>
+		</div>
+
 		<h2>IT Skills</h2>
 		<ul class="skills-grid">
 			{skills.map(skill => <li>{skill}</li>)}
@@ -45,10 +69,10 @@ const skills = [
 
 		<h2>Languages</h2>
 		<div class="languages">
-			<p><strong>English:</strong> Native/C1 Proficient</p>
 			<p><strong>German:</strong> Native</p>
-			<p><strong>French:</strong> Basic/Intermediate</p>
-			<p><strong>Chinese:</strong> Basic</p>
+			<p><strong>English:</strong> Full professional proficiency</p>
+			<p><strong>Chinese:</strong> Elementary proficiency</p>
+			<p><strong>French:</strong> Elementary proficiency</p>
 		</div>
 
 		<h2>Contact</h2>

@@ -1,7 +1,7 @@
 ---
-title: "SCRUM Foundation"
-organization: "ITEMO"
-date: 2020-01-01
+title: "ITEMO SCRUM Master & Product Owner Part I (Foundation)"
+organization: "ICO International Certification Organization"
+date: 2025-02-01
 type: "certification"
 ---
-ITEMO SCRUM Foundation Certification.
+ITEMO SCRUM Master & Product Owner Part I (Foundation) Certification.

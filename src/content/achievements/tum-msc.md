@@ -1,7 +1,7 @@
 ---
 title: "M.Sc. Information Systems"
 organization: "Technical University of Munich"
-date: 2021-10-01
+date: 2023-11-01
 type: "academic"
 ---
-Currently pursuing a Master of Science in Information Systems at TUM.
+Completed Master of Science in Information Systems with distinction (Grade: 1.0). Specialized in Software Engineering and AI.

@@ -1,5 +1,5 @@
 ---
-title: "Working Student"
+title: "Software Engineer - Working Student"
 company: "Daimler TSS"
 location: "Ulm, Germany"
 startDate: 2020-11-01
