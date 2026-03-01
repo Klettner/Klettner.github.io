@@ -4,7 +4,7 @@ description: "Android, Linux, and Windows application for controlling a smart mi
 publishDate: 2020-01-01
 tags: ["Flutter", "Dart", "Android", "Linux", "Windows"]
 link: "https://github.com/Klettner/MM-Remote"
-image: "/images/mm-remote.jpg"
+image: "/images/mm-remote.png"
 ---
 
 MM-Remote is a multi-platform application designed to control a Smart Mirror remotely. It integrates seamlessly with various MagicMirror modules while also providing the flexibility to create custom commands for tailored functionality.

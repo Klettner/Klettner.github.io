@@ -1,6 +1,6 @@
 ---
 title: "Kanban-ToDo"
-description: "Android application for collaborative task management, offering both simple ToDo lists and complex Kanban boards."
+description: "Android application for collaborative task management, offering both simple ToDo lists and sophisticated Kanban boards."
 publishDate: 2020-06-01
 tags: ["Flutter", "Dart", "Android", "Cloud Sync"]
 image: "/images/kanban-todo.png"

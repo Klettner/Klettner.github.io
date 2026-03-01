@@ -1,6 +1,6 @@
 ---
 title: "MagicMirror"
-description: "A smart mirror displaying information like the weather, public transport information, the song currently playing on Spotify, or a slideshow of pictures."
+description: "A smart mirror displaying information like the weather, public transport information, music playing on Spotify, or a slideshow of pictures."
 publishDate: 2019-06-01
 tags: ["Raspberry Pi", "Linux", "IoT", "Sensors"]
 image: "/images/magic-mirror.jpg"
