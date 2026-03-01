@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from 'astro:transitions';
+
 interface Props {
 	title: string;
 	description?: string;
@@ -17,6 +19,7 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ClientRouter />
 	</head>
 	<body>
 		<header>
@@ -29,12 +32,35 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 				</div>
 			</nav>
 		</header>
-		<main>
+		<main transition:animate="slide">
 			<slot />
 		</main>
 		<footer>
 			<p>&copy; {new Date().getFullYear()} Manuel Klettner.</p>
 		</footer>
+
+		<script is:inline>
+			document.addEventListener('astro:before-preparation', (ev) => {
+				const pages = ['/', '/projects/', '/achievements/', '/about/'];
+				
+				const normalizePath = (p) => {
+					let n = p.replace(/\/$/, '') || '/';
+					if (n !== '/' && !n.endsWith('/')) n += '/';
+					if (!n.startsWith('/')) n = '/' + n;
+					return n;
+				};
+
+				const from = normalizePath(window.location.pathname);
+				const to = normalizePath(new URL(ev.to).pathname);
+
+				const fromIndex = pages.indexOf(from);
+				const toIndex = pages.indexOf(to);
+
+				if (fromIndex !== -1 && toIndex !== -1 && toIndex < fromIndex) {
+					ev.direction = 'back';
+				}
+			});
+		</script>
 	</body>
 </html>
 
