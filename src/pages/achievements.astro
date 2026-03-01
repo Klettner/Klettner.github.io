@@ -64,17 +64,18 @@ const achievements = (await getCollection('achievements')).sort(
 		align-self: flex-start;
 		font-size: 0.65rem;
 		text-transform: uppercase;
-		background: #eee;
-		color: #444;
+		background: var(--tag-bg);
+		color: var(--secondary-text);
 		padding: 0.1rem 0.5rem;
 		border-radius: 4px;
 		font-weight: 700;
 		letter-spacing: 0.05em;
+		transition: background-color 0.3s, color 0.3s;
 	}
 
-	.type-badge[data-type="academic"] { background: #e3f2fd; color: #1976d2; }
-	.type-badge[data-type="certification"] { background: #e8f5e9; color: #2e7d32; }
-	.type-badge[data-type="international"] { background: #fff3e0; color: #e65100; }
+	.type-badge[data-type="academic"] { background: var(--badge-academic-bg); color: var(--badge-academic-text); }
+	.type-badge[data-type="certification"] { background: var(--badge-cert-bg); color: var(--badge-cert-text); }
+	.type-badge[data-type="international"] { background: var(--badge-intl-bg); color: var(--badge-intl-text); }
 
 	.org {
 		font-weight: 600;

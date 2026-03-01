@@ -52,7 +52,7 @@ const achievements = (await getCollection('achievements')).sort(
 					<div class="achievement-content">
 						<strong>{achievement.data.title}</strong>
 						{achievement.data.organization && <span> at {achievement.data.organization}</span>}
-						<span class="type-badge">{achievement.data.type}</span>
+						<span class="type-badge" data-type={achievement.data.type}>{achievement.data.type}</span>
 					</div>
 				</li>
 			))}
@@ -118,15 +118,15 @@ const achievements = (await getCollection('achievements')).sort(
 		padding: 1.5rem;
 		border: 1px solid var(--border-color);
 		border-radius: 8px;
-		transition: transform 0.2s, box-shadow 0.2s;
-		background: #fafafa;
+		transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+		background: var(--card-bg);
 		position: relative;
 	}
 
 	.card:hover {
 		transform: translateY(-4px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-		background: #ffffff;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		background: var(--card-hover-bg);
 	}
 
 	.card-link {
@@ -139,7 +139,7 @@ const achievements = (await getCollection('achievements')).sort(
 		width: 100%;
 		height: 200px;
 		object-fit: contain;
-		background: #f0f0f0;
+		background: var(--image-bg);
 		border-radius: 4px;
 		margin-bottom: 1rem;
 		border: 1px solid var(--border-color);
@@ -159,10 +159,11 @@ const achievements = (await getCollection('achievements')).sort(
 
 	.tag {
 		font-size: 0.75rem;
-		background: #eee;
+		background: var(--tag-bg);
 		padding: 0.2rem 0.6rem;
 		border-radius: 4px;
 		color: var(--secondary-text);
+		transition: background-color 0.3s;
 	}
 
 	.link {
@@ -191,15 +192,22 @@ const achievements = (await getCollection('achievements')).sort(
 	}
 
 	.type-badge {
-		font-size: 0.7rem;
+		font-size: 0.65rem;
 		text-transform: uppercase;
-		background: var(--text-color);
-		color: white;
-		padding: 0.1rem 0.4rem;
+		background: var(--tag-bg);
+		color: var(--secondary-text);
+		padding: 0.1rem 0.5rem;
 		border-radius: 4px;
 		margin-left: 0.5rem;
 		font-weight: bold;
+		transition: background-color 0.3s, color 0.3s;
+		display: inline-block;
+		vertical-align: middle;
 	}
+
+	.type-badge[data-type="academic"] { background: var(--badge-academic-bg); color: var(--badge-academic-text); }
+	.type-badge[data-type="certification"] { background: var(--badge-cert-bg); color: var(--badge-cert-text); }
+	.type-badge[data-type="international"] { background: var(--badge-intl-bg); color: var(--badge-intl-text); }
 
 	.view-all {
 		display: inline-block;

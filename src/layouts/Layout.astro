@@ -20,6 +20,25 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<ClientRouter />
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+		
+			if (theme === 'light') {
+				document.documentElement.setAttribute('data-theme', 'light');
+			} else {
+				document.documentElement.setAttribute('data-theme', 'dark');
+			}
+
+			window.localStorage.setItem('theme', theme);
+		</script>
 	</head>
 	<body>
 		<header>
@@ -29,6 +48,10 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 					<a href="/projects/">Projects</a>
 					<a href="/achievements/">Achievements</a>
 					<a href="/about/">About</a>
+					<button id="theme-toggle" aria-label="Toggle dark mode">
+						<svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+						<svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+					</button>
 				</div>
 			</nav>
 		</header>
@@ -60,6 +83,27 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 					ev.direction = 'back';
 				}
 			});
+
+			function setupThemeToggle() {
+				const themeToggle = document.getElementById('theme-toggle');
+				if (themeToggle) {
+					themeToggle.addEventListener('click', () => {
+						const currentTheme = document.documentElement.getAttribute('data-theme');
+						const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+						document.documentElement.setAttribute('data-theme', newTheme);
+						localStorage.setItem('theme', newTheme);
+					});
+				}
+			}
+
+			// Run on every page load
+			document.addEventListener('astro:page-load', setupThemeToggle);
+
+			// Re-apply theme after view transition swap
+			document.addEventListener('astro:after-swap', () => {
+				const theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+				document.documentElement.setAttribute('data-theme', theme);
+			});
 		</script>
 	</body>
 </html>
@@ -71,7 +115,35 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 		--accent-color: #0070f3;
 		--secondary-text: #666;
 		--border-color: #eaeaea;
+		--card-bg: #fafafa;
+		--card-hover-bg: #ffffff;
+		--tag-bg: #eeeeee;
+		--image-bg: #f0f0f0;
+		--badge-academic-bg: #e3f2fd;
+		--badge-academic-text: #1976d2;
+		--badge-cert-bg: #e8f5e9;
+		--badge-cert-text: #2e7d32;
+		--badge-intl-bg: #fff3e0;
+		--badge-intl-text: #e65100;
 		--max-width: 800px;
+	}
+
+	[data-theme='dark'] {
+		--bg-color: #0a0a0a;
+		--text-color: #ededed;
+		--accent-color: #3291ff;
+		--secondary-text: #a0a0a0;
+		--border-color: #333;
+		--card-bg: #161616;
+		--card-hover-bg: #1c1c1c;
+		--tag-bg: #222222;
+		--image-bg: #1a1a1a;
+		--badge-academic-bg: #0d2744;
+		--badge-academic-text: #60a5fa;
+		--badge-cert-bg: #062d14;
+		--badge-cert-text: #4ade80;
+		--badge-intl-bg: #351a05;
+		--badge-intl-text: #fb923c;
 	}
 
 	* {
@@ -87,6 +159,7 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 		background-color: var(--bg-color);
 		color: var(--text-color);
 		line-height: 1.6;
+		transition: background-color 0.3s, color 0.3s;
 	}
 
 	body {
@@ -98,6 +171,7 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 	header {
 		border-bottom: 1px solid var(--border-color);
 		padding: 1rem 0;
+		transition: border-color 0.3s;
 	}
 
 	nav {
@@ -119,6 +193,7 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 	.links {
 		display: flex;
 		gap: 1.5rem;
+		align-items: center;
 	}
 
 	.links a {
@@ -127,6 +202,29 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 		font-weight: 500;
 		transition: color 0.2s;
 	}
+
+	#theme-toggle {
+		background: none;
+		border: 1px solid var(--border-color);
+		color: var(--text-color);
+		cursor: pointer;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background-color 0.2s, border-color 0.2s;
+	}
+
+	#theme-toggle:hover {
+		background-color: var(--border-color);
+	}
+
+	#theme-toggle .sun { display: none; }
+	#theme-toggle .moon { display: block; }
+
+	[data-theme='dark'] #theme-toggle .sun { display: block; }
+	[data-theme='dark'] #theme-toggle .moon { display: none; }
 
 	.links a:hover {
 		color: var(--accent-color);
@@ -146,6 +244,7 @@ const { title, description = "A modern software engineer's portfolio" } = Astro.
 		text-align: center;
 		color: var(--secondary-text);
 		font-size: 0.9rem;
+		transition: border-color 0.3s;
 	}
 
 	footer a {
