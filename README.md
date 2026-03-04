@@ -1,46 +1,50 @@
-# Astro Starter Kit: Basics
+# Manuel Klettner - Personal Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+This is the source code for my personal portfolio website, built with [Astro](https://astro.build/) and TypeScript. It showcases my professional experience, academic achievements, and personal projects.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Technologies
 
-## 🚀 Project Structure
+- **Framework:** [Astro](https://astro.build/) (v5)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** Vanilla CSS (Custom Properties for Theme Support)
+- **Content Management:** Astro Content Collections (Markdown)
 
-Inside of your Astro project, you'll see the following folders and files:
+## 📁 Project Structure
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+│   └── images/             # Static images for profile and projects
+├── src/
+│   ├── assets/             # SVGs and other assets
+│   ├── content/            # Markdown content for collections
+│   │   ├── achievements/   # Academic and professional certifications
+│   │   ├── experience/     # Work history
+│   │   └── projects/       # Personal projects
+│   ├── layouts/            # Base page layouts
+│   └── pages/              # Main website pages (About, Achievements, Index, Projects)
+├── astro.config.mjs        # Astro configuration
+└── package.json            # Project dependencies and scripts
 ```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
 
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command | Action |
+| :--- | :--- |
+| `npm install` | Installs dependencies |
+| `npm run dev` | Starts local dev server at `localhost:4321` |
+| `npm run build` | Build your production site to `./dist/` |
+| `npm run preview` | Preview your build locally, before deploying |
+| `npm run astro ...` | Run CLI commands like `astro add`, `astro check` |
 
-## 👀 Want to learn more?
+## 🛠 Content Configuration
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The site uses three main content collections defined in `src/content/config.ts`:
+
+- **Projects:** Title, description, publish date, tags, and links.
+- **Achievements:** Title, organization, date, and type (academic, certification, etc.).
+- **Experience:** Title, company, location, dates, and description.
+
+To add new content, simply create a new `.md` file in the respective folder under `src/content/`.
