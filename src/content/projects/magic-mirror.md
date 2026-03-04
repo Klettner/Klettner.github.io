@@ -8,7 +8,7 @@ image: "/images/magic-mirror.jpg"
 
 This project is a smart mirror based on Michael Teeuw's MagicMirror open-source platform. It transforms a standard mirror into an information hub by placing a monitor behind a one-way mirror and using a Raspberry Pi to control the interface.
 
-### Features
+### Core Features
 - **Real-time Information:** Displays time, date, weather forecasts, and pollen counts.
 - **Integration:** Syncs with Google Tasks and displays public transport information for local stations.
 - **Multimedia:** Shows the current track playing on Spotify (including cover art) and supports a photo slideshow.
