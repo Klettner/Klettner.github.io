@@ -2,14 +2,15 @@ import { defineCollection, z } from 'astro:content';
 
 const projectsCollection = defineCollection({
   type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    publishDate: z.coerce.date(),
-    tags: z.array(z.string()).optional(),
-    link: z.string().url().optional(),
-    image: z.string().optional(),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      publishDate: z.coerce.date(),
+      tags: z.array(z.string()).optional(),
+      link: z.string().url().optional(),
+      image: image().optional(),
+    }),
 });
 
 const achievementsCollection = defineCollection({
