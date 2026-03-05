@@ -1,7 +1,7 @@
 ---
-title: "Student Assistant"
-company: "Technical University of Munich"
-location: "Munich, Germany"
+title: 'Student Assistant'
+company: 'Technical University of Munich'
+location: 'Munich, Germany'
 startDate: 2019-10-01
 endDate: 2020-07-01
 current: false

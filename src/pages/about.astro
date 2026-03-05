@@ -3,161 +3,222 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 
 const experience = (await getCollection('experience')).sort(
-	(a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
+  (a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
 );
 
 const skills = [
-	"Java", "TypeScript", "JavaScript", "Python", "C#", "ASP.NET Core", "React", "Flutter", "Swift", "REST", "GraphQL", "MQTT", "Node.js", "MongoDB", "SQL", "Git", "Docker", "Kubernetes", "Helm", "OpenShift", "Grafana", "Chaos Engineering", "Artificial Intelligence (AI)", "Large Language Models (LLM)", "Google Cloud Platform (GCP)", "Microsoft Azure", "Agile Methodologies", "SCRUM"
+  'Java',
+  'TypeScript',
+  'JavaScript',
+  'Python',
+  'C#',
+  'ASP.NET Core',
+  'React',
+  'Flutter',
+  'Swift',
+  'REST',
+  'GraphQL',
+  'MQTT',
+  'Node.js',
+  'MongoDB',
+  'SQL',
+  'Git',
+  'Docker',
+  'Kubernetes',
+  'Helm',
+  'OpenShift',
+  'Grafana',
+  'Chaos Engineering',
+  'Artificial Intelligence (AI)',
+  'Large Language Models (LLM)',
+  'Google Cloud Platform (GCP)',
+  'Microsoft Azure',
+  'Agile Methodologies',
+  'SCRUM',
 ];
 ---
 
 <Layout title="About | Manuel Klettner">
-	<h1>About Me</h1>
+  <h1>About Me</h1>
 
-	<div class="content">
-		<p>I am a Software Engineer at <strong>Rohde & Schwarz</strong> with a focus on building robust, scalable, and innovative digital solutions. I hold a Master of Science in Information Systems from the Technical University of Munich (TUM), where I graduated with distinction.</p>
+  <div class="content">
+    <p>
+      I am a Software Engineer at <strong>Rohde & Schwarz</strong> with a focus on
+      building robust, scalable, and innovative digital solutions. I hold a Master
+      of Science in Information Systems from the Technical University of Munich (TUM),
+      where I graduated with distinction.
+    </p>
 
-		<p>My expertise spans across cloud-native architectures, DevOps and the emerging field of Large Language Models (LLMs). I am driven by the challenge of solving complex problems through elegant software design.</p>
+    <p>
+      My expertise spans across cloud-native architectures, DevOps and the
+      emerging field of Large Language Models (LLMs). I am driven by the
+      challenge of solving complex problems through elegant software design.
+    </p>
 
-		<h2>Practical Experience</h2>
-		<div class="experience-list">
-			{experience.map(exp => (
-				<div class="exp-item">
-					<div class="exp-header">
-						<div>
-							<h3>{exp.data.title}</h3>
-							<span class="company">{exp.data.company}</span>
-						</div>
-						<span class="period">
-							{exp.data.startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })} - 
-							{exp.data.current ? 'Present' : exp.data.endDate?.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
-						</span>
-					</div>
-					<p>{exp.data.description}</p>
-				</div>
-			))}
-		</div>
+    <h2>Practical Experience</h2>
+    <div class="experience-list">
+      {
+        experience.map((exp) => (
+          <div class="exp-item">
+            <div class="exp-header">
+              <div>
+                <h3>{exp.data.title}</h3>
+                <span class="company">{exp.data.company}</span>
+              </div>
+              <span class="period">
+                {exp.data.startDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                })}{' '}
+                -
+                {exp.data.current
+                  ? 'Present'
+                  : exp.data.endDate?.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'short',
+                    })}
+              </span>
+            </div>
+            <p>{exp.data.description}</p>
+          </div>
+        ))
+      }
+    </div>
 
-		<h2>Education</h2>
-		<div class="education-list">
-			<div class="exp-item">
-				<div class="exp-header">
-					<div>
-						<h3>Master of Science, Information Systems</h3>
-						<span class="company">Technical University of Munich</span>
-					</div>
-					<span class="period">2022 - 2023</span>
-				</div>
-				<p>Thesis: Augmenting Knowledge-Based Conversational Search Systems With Large Language Models (Grade: 1.0)</p>
-			</div>
-			<div class="exp-item">
-				<div class="exp-header">
-					<div>
-						<h3>Bachelor of Science, Information Systems</h3>
-						<span class="company">Technical University of Munich</span>
-					</div>
-					<span class="period">2018 - 2022</span>
-				</div>
-				<p>Among the top 9% in field of study. Thesis: Context-sensitive Requirements Search in Natural Language Specifications (Grade: 1.0)</p>
-			</div>
-		</div>
+    <h2>Education</h2>
+    <div class="education-list">
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <h3>Master of Science, Information Systems</h3>
+            <span class="company">Technical University of Munich</span>
+          </div>
+          <span class="period">2022 - 2023</span>
+        </div>
+        <p>
+          Thesis: Augmenting Knowledge-Based Conversational Search Systems With
+          Large Language Models (Grade: 1.0)
+        </p>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <h3>Bachelor of Science, Information Systems</h3>
+            <span class="company">Technical University of Munich</span>
+          </div>
+          <span class="period">2018 - 2022</span>
+        </div>
+        <p>
+          Among the top 9% in field of study. Thesis: Context-sensitive
+          Requirements Search in Natural Language Specifications (Grade: 1.0)
+        </p>
+      </div>
+    </div>
 
-		<h2>IT Skills</h2>
-		<ul class="skills-grid">
-			{skills.map(skill => <li>{skill}</li>)}
-		</ul>
+    <h2>IT Skills</h2>
+    <ul class="skills-grid">
+      {skills.map((skill) => <li>{skill}</li>)}
+    </ul>
 
-		<h2>Languages</h2>
-		<div class="languages">
-			<p><strong>German:</strong> Native</p>
-			<p><strong>English:</strong> Full professional proficiency</p>
-			<p><strong>Chinese:</strong> Elementary proficiency</p>
-			<p><strong>French:</strong> Elementary proficiency</p>
-		</div>
+    <h2>Languages</h2>
+    <div class="languages">
+      <p><strong>German:</strong> Native</p>
+      <p><strong>English:</strong> Full professional proficiency</p>
+      <p><strong>Chinese:</strong> Elementary proficiency</p>
+      <p><strong>French:</strong> Elementary proficiency</p>
+    </div>
 
-		<h2>Contact</h2>
-		<p>Feel free to reach out to me.</p>
-		<ul class="contact-links">
-			<li>LinkedIn: <a href="https://www.linkedin.com/in/klettner" target="_blank">linkedin.com/in/klettner</a></li>
-			<li>GitHub: <a href="https://github.com/Klettner" target="_blank">github.com/Klettner</a></li>
-		</ul>
-	</div>
+    <h2>Contact</h2>
+    <p>Feel free to reach out to me.</p>
+    <ul class="contact-links">
+      <li>
+        LinkedIn: <a href="https://www.linkedin.com/in/klettner" target="_blank"
+          >linkedin.com/in/klettner</a
+        >
+      </li>
+      <li>
+        GitHub: <a href="https://github.com/Klettner" target="_blank"
+          >github.com/Klettner</a
+        >
+      </li>
+    </ul>
+  </div>
 </Layout>
 
 <style>
-	.content {
-		max-width: 100%;
-	}
+  .content {
+    max-width: 100%;
+  }
 
-	.experience-list {
-		margin: 2rem 0;
-	}
+  .experience-list {
+    margin: 2rem 0;
+  }
 
-	.exp-item {
-		margin-bottom: 2.5rem;
-	}
+  .exp-item {
+    margin-bottom: 2.5rem;
+  }
 
-	.exp-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: baseline;
-		margin-bottom: 0.5rem;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 
-	.exp-header h3 {
-		margin: 0;
-		font-size: 1.25rem;
-	}
+  .exp-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
 
-	.company {
-		font-weight: 600;
-		color: var(--accent-color);
-		display: block;
-	}
+  .company {
+    font-weight: 600;
+    color: var(--accent-color);
+    display: block;
+  }
 
-	.period {
-		font-size: 0.9rem;
-		color: var(--secondary-text);
-		font-variant-numeric: tabular-nums;
-	}
+  .period {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    font-variant-numeric: tabular-nums;
+  }
 
-	.skills-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-		gap: 0.75rem;
-		list-style: none;
-		padding: 0;
-		margin: 1.5rem 0 3rem;
-	}
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 3rem;
+  }
 
-	.skills-grid li {
-		background: var(--tag-bg);
-		padding: 0.5rem 1rem;
-		border-radius: 4px;
-		font-size: 0.9rem;
-		text-align: center;
-		border: 1px solid var(--border-color);
-		transition: background-color 0.3s;
-	}
+  .skills-grid li {
+    background: var(--tag-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s;
+  }
 
-	.languages {
-		margin-top: 1rem;
-		margin-bottom: 3rem;
-	}
+  .languages {
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
 
-	.languages p {
-		margin: 0.25rem 0;
-	}
+  .languages p {
+    margin: 0.25rem 0;
+  }
 
-	.contact-links {
-		list-style: none;
-		padding: 0;
-		margin-top: 1rem;
-	}
+  .contact-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+  }
 
-	.contact-links li {
-		margin-bottom: 0.5rem;
-	}
+  .contact-links li {
+    margin-bottom: 0.5rem;
+  }
 </style>

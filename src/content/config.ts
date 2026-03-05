@@ -18,7 +18,13 @@ const achievementsCollection = defineCollection({
     title: z.string(),
     organization: z.string().optional(),
     date: z.coerce.date(),
-    type: z.enum(['academic', 'certification', 'award', 'international', 'other']),
+    type: z.enum([
+      'academic',
+      'certification',
+      'award',
+      'international',
+      'other',
+    ]),
   }),
 });
 

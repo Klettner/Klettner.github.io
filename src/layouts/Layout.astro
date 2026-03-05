@@ -2,275 +2,359 @@
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
-	title: string;
-	description?: string;
-	noindex?: boolean;
+  title: string;
+  description?: string;
+  noindex?: boolean;
 }
 
-const { title, description = "A modern software engineer's portfolio", noindex = false } = Astro.props;
+const {
+  title,
+  description = "A modern software engineer's portfolio",
+  noindex = false,
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1" />
-		<meta name="generator" content={Astro.generator} />
-		{noindex && <meta name="robots" content="noindex, nofollow" />}
-		<title>{title}</title>
-		<script is:inline>
-			const theme = (() => {
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
-				}
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					return 'dark';
-				}
-				return 'light';
-			})();
-		
-			document.documentElement.setAttribute('data-theme', theme);
-			window.localStorage.setItem('theme', theme);
-		</script>
-		<ClientRouter />
-	</head>
-	<body>
-		<header>
-			<nav>
-				<a href="/" class="site-title">Manuel Klettner</a>
-				<div class="links">
-					<a href="/projects/">Projects</a>
-					<a href="/achievements/">Achievements</a>
-					<a href="/about/">About</a>
-					<button id="theme-toggle" aria-label="Toggle dark mode">
-						<svg class="sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-						<svg class="moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-					</button>
-				</div>
-			</nav>
-		</header>
-		<main transition:animate="slide">
-			<slot />
-		</main>
-		<footer>
-			<p>&copy; {new Date().getFullYear()} Manuel Klettner. <a href="/impressum/">Impressum</a> | <a href="/datenschutz/">Datenschutz</a></p>
-		</footer>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1" />
+    <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <title>{title}</title>
+    <script is:inline>
+      const theme = (() => {
+        if (
+          typeof localStorage !== 'undefined' &&
+          localStorage.getItem('theme')
+        ) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
 
-		<script is:inline>
-			document.addEventListener('astro:before-preparation', (ev) => {
-				const pages = ['/', '/projects/', '/achievements/', '/about/'];
-				
-				const normalizePath = (p) => {
-					let n = p.replace(/\/$/, '') || '/';
-					if (n !== '/' && !n.endsWith('/')) n += '/';
-					if (!n.startsWith('/')) n = '/' + n;
-					return n;
-				};
+      document.documentElement.setAttribute('data-theme', theme);
+      window.localStorage.setItem('theme', theme);
+    </script>
+    <ClientRouter />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/" class="site-title">Manuel Klettner</a>
+        <div class="links">
+          <a href="/projects/">Projects</a>
+          <a href="/achievements/">Achievements</a>
+          <a href="/about/">About</a>
+          <button id="theme-toggle" aria-label="Toggle dark mode">
+            <svg
+              class="sun"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><circle cx="12" cy="12" r="5"></circle><line
+                x1="12"
+                y1="1"
+                x2="12"
+                y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line
+                x1="4.22"
+                y1="4.22"
+                x2="5.64"
+                y2="5.64"></line><line
+                x1="18.36"
+                y1="18.36"
+                x2="19.78"
+                y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"
+              ></line><line x1="21" y1="12" x2="23" y2="12"></line><line
+                x1="4.22"
+                y1="19.78"
+                x2="5.64"
+                y2="18.36"></line><line
+                x1="18.36"
+                y1="5.64"
+                x2="19.78"
+                y2="4.22"></line></svg
+            >
+            <svg
+              class="moon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+              ></path></svg
+            >
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main transition:animate="slide">
+      <slot />
+    </main>
+    <footer>
+      <p>
+        &copy; {new Date().getFullYear()} Manuel Klettner. <a href="/impressum/"
+          >Impressum</a
+        > | <a href="/datenschutz/">Datenschutz</a>
+      </p>
+    </footer>
 
-				const from = normalizePath(window.location.pathname);
-				const to = normalizePath(new URL(ev.to).pathname);
+    <script is:inline>
+      document.addEventListener('astro:before-preparation', (ev) => {
+        const pages = ['/', '/projects/', '/achievements/', '/about/'];
 
-				const fromIndex = pages.indexOf(from);
-				const toIndex = pages.indexOf(to);
+        const normalizePath = (p) => {
+          let n = p.replace(/\/$/, '') || '/';
+          if (n !== '/' && !n.endsWith('/')) n += '/';
+          if (!n.startsWith('/')) n = '/' + n;
+          return n;
+        };
 
-				if (fromIndex !== -1 && toIndex !== -1 && toIndex < fromIndex) {
-					ev.direction = 'back';
-				}
-			});
+        const from = normalizePath(window.location.pathname);
+        const to = normalizePath(new URL(ev.to).pathname);
 
-			function setupThemeToggle() {
-				const themeToggle = document.getElementById('theme-toggle');
-				if (themeToggle) {
-					themeToggle.addEventListener('click', () => {
-						const currentTheme = document.documentElement.getAttribute('data-theme');
-						const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-						
-						// Add transition class only during manual toggle
-						document.documentElement.classList.add('theme-transition');
-						document.documentElement.setAttribute('data-theme', newTheme);
-						localStorage.setItem('theme', newTheme);
-						
-						// Remove transition class after it finishes
-						setTimeout(() => {
-							document.documentElement.classList.remove('theme-transition');
-						}, 300);
-					});
-				}
-			}
+        const fromIndex = pages.indexOf(from);
+        const toIndex = pages.indexOf(to);
 
-			// Run on every page load
-			document.addEventListener('astro:page-load', setupThemeToggle);
+        if (fromIndex !== -1 && toIndex !== -1 && toIndex < fromIndex) {
+          ev.direction = 'back';
+        }
+      });
 
-			// Prevent flash by copying theme to new document before swap
-			document.addEventListener('astro:before-swap', (ev) => {
-				const theme = document.documentElement.getAttribute('data-theme');
-				if (theme) {
-					ev.newDocument.documentElement.setAttribute('data-theme', theme);
-				}
-			});
-		</script>
-	</body>
+      function setupThemeToggle() {
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            const currentTheme =
+              document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            // Add transition class only during manual toggle
+            document.documentElement.classList.add('theme-transition');
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            // Remove transition class after it finishes
+            setTimeout(() => {
+              document.documentElement.classList.remove('theme-transition');
+            }, 300);
+          });
+        }
+      }
+
+      // Run on every page load
+      document.addEventListener('astro:page-load', setupThemeToggle);
+
+      // Prevent flash by copying theme to new document before swap
+      document.addEventListener('astro:before-swap', (ev) => {
+        const theme = document.documentElement.getAttribute('data-theme');
+        if (theme) {
+          ev.newDocument.documentElement.setAttribute('data-theme', theme);
+        }
+      });
+    </script>
+  </body>
 </html>
 
 <style is:global>
-	:root {
-		--bg-color: #ffffff;
-		--text-color: #111111;
-		--accent-color: #0070f3;
-		--secondary-text: #666;
-		--border-color: #eaeaea;
-		--card-bg: #fafafa;
-		--card-hover-bg: #ffffff;
-		--tag-bg: #eeeeee;
-		--image-bg: #f0f0f0;
-		--badge-academic-bg: #e3f2fd;
-		--badge-academic-text: #1976d2;
-		--badge-cert-bg: #e8f5e9;
-		--badge-cert-text: #2e7d32;
-		--badge-intl-bg: #fff3e0;
-		--badge-intl-text: #e65100;
-		--max-width: 800px;
-	}
+  :root {
+    --bg-color: #ffffff;
+    --text-color: #111111;
+    --accent-color: #0070f3;
+    --secondary-text: #666;
+    --border-color: #eaeaea;
+    --card-bg: #fafafa;
+    --card-hover-bg: #ffffff;
+    --tag-bg: #eeeeee;
+    --image-bg: #f0f0f0;
+    --badge-academic-bg: #e3f2fd;
+    --badge-academic-text: #1976d2;
+    --badge-cert-bg: #e8f5e9;
+    --badge-cert-text: #2e7d32;
+    --badge-intl-bg: #fff3e0;
+    --badge-intl-text: #e65100;
+    --max-width: 800px;
+  }
 
-	[data-theme='dark'] {
-		--bg-color: #0a0a0a;
-		--text-color: #ededed;
-		--accent-color: #3291ff;
-		--secondary-text: #a0a0a0;
-		--border-color: #333;
-		--card-bg: #161616;
-		--card-hover-bg: #1c1c1c;
-		--tag-bg: #222222;
-		--image-bg: #1a1a1a;
-		--badge-academic-bg: #0d2744;
-		--badge-academic-text: #60a5fa;
-		--badge-cert-bg: #062d14;
-		--badge-cert-text: #4ade80;
-		--badge-intl-bg: #351a05;
-		--badge-intl-text: #fb923c;
-	}
+  [data-theme='dark'] {
+    --bg-color: #0a0a0a;
+    --text-color: #ededed;
+    --accent-color: #3291ff;
+    --secondary-text: #a0a0a0;
+    --border-color: #333;
+    --card-bg: #161616;
+    --card-hover-bg: #1c1c1c;
+    --tag-bg: #222222;
+    --image-bg: #1a1a1a;
+    --badge-academic-bg: #0d2744;
+    --badge-academic-text: #60a5fa;
+    --badge-cert-bg: #062d14;
+    --badge-cert-text: #4ade80;
+    --badge-intl-bg: #351a05;
+    --badge-intl-text: #fb923c;
+  }
 
-	* {
-		box-sizing: border-box;
-	}
+  * {
+    box-sizing: border-box;
+  }
 
-	html,
-	body {
-		margin: 0;
-		padding: 0;
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-			Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-		background-color: var(--bg-color);
-		color: var(--text-color);
-		line-height: 1.6;
-	}
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+      Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
 
-	html.theme-transition,
-	html.theme-transition *,
-	html.theme-transition *:before,
-	html.theme-transition *:after {
-		transition: background-color 0.3s, color 0.3s, border-color 0.3s !important;
-		transition-delay: 0s !important;
-	}
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *:before,
+  html.theme-transition *:after {
+    transition:
+      background-color 0.3s,
+      color 0.3s,
+      border-color 0.3s !important;
+    transition-delay: 0s !important;
+  }
 
-	body {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
 
-	header {
-		border-bottom: 1px solid var(--border-color);
-		padding: 1rem 0;
-	}
+  header {
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+  }
 
-	nav {
-		max-width: var(--max-width);
-		margin: 0 auto;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 0 1.5rem;
-	}
+  nav {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+  }
 
-	.site-title {
-		font-size: 1.25rem;
-		font-weight: 700;
-		text-decoration: none;
-		color: var(--text-color);
-	}
+  .site-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-color);
+  }
 
-	.links {
-		display: flex;
-		gap: 1.5rem;
-		align-items: center;
-	}
+  .links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
 
-	.links a {
-		text-decoration: none;
-		color: var(--secondary-text);
-		font-weight: 500;
-		transition: color 0.2s;
-	}
+  .links a {
+    text-decoration: none;
+    color: var(--secondary-text);
+    font-weight: 500;
+    transition: color 0.2s;
+  }
 
-	#theme-toggle {
-		background: none;
-		border: 1px solid var(--border-color);
-		color: var(--text-color);
-		cursor: pointer;
-		padding: 0.5rem;
-		border-radius: 0.5rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		transition: background-color 0.2s, border-color 0.2s;
-	}
+  #theme-toggle {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s;
+  }
 
-	#theme-toggle:hover {
-		background-color: var(--border-color);
-	}
+  #theme-toggle:hover {
+    background-color: var(--border-color);
+  }
 
-	#theme-toggle .sun { display: none; }
-	#theme-toggle .moon { display: block; }
+  #theme-toggle .sun {
+    display: none;
+  }
+  #theme-toggle .moon {
+    display: block;
+  }
 
-	[data-theme='dark'] #theme-toggle .sun { display: block; }
-	[data-theme='dark'] #theme-toggle .moon { display: none; }
+  [data-theme='dark'] #theme-toggle .sun {
+    display: block;
+  }
+  [data-theme='dark'] #theme-toggle .moon {
+    display: none;
+  }
 
-	.links a:hover {
-		color: var(--accent-color);
-	}
+  .links a:hover {
+    color: var(--accent-color);
+  }
 
-	main {
-		flex: 1;
-		width: 100%;
-		max-width: var(--max-width);
-		margin: 0 auto;
-		padding: 3rem 1.5rem;
-	}
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+  }
 
-	footer {
-		padding: 2rem 1.5rem;
-		border-top: 1px solid var(--border-color);
-		text-align: center;
-		color: var(--secondary-text);
-		font-size: 0.9rem;
-	}
+  footer {
+    padding: 2rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    color: var(--secondary-text);
+    font-size: 0.9rem;
+  }
 
-	footer a {
-		color: inherit;
-		text-decoration: underline;
-	}
+  footer a {
+    color: inherit;
+    text-decoration: underline;
+  }
 
-	h1, h2, h3 {
-		margin-top: 2rem;
-		margin-bottom: 1rem;
-		line-height: 1.2;
-	}
+  h1,
+  h2,
+  h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
 
-	h1 { font-size: 2.5rem; }
-	h2 { font-size: 1.75rem; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.25rem; display: inline-block; margin-bottom: 2rem; }
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.25rem;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
 
-	a { color: var(--accent-color); }
+  a {
+    color: var(--accent-color);
+  }
 </style>
