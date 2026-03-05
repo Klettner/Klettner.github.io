@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Impressum | Manuel Klettner" noindex={true}>
+	<main class="legal-content">
+		<h1>Impressum</h1>
+		
+		<section>
+			<h2>Angaben gemäß § 5 DDG</h2>
+			<p>
+				Manuel Klettner<br />
+				89257 Illertissen<br />
+				Deutschland
+			</p>
+		</section>
+
+		<section>
+			<h2>Kontakt</h2>
+			<p>
+				E-Mail: manuel03.klettner@gmail.com<br />
+				LinkedIn: <a href="https://www.linkedin.com/in/klettner" target="_blank">linkedin.com/in/klettner</a>
+			</p>
+		</section>
+
+		<section>
+			<h2>Redaktionell verantwortlich</h2>
+			<p>
+				Manuel Klettner<br />
+				89257 Illertissen<br />
+				Deutschland
+			</p>
+		</section>
+
+		<section>
+			<h2>EU-Streitschlichtung</h2>
+			<p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.<br /> Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+		</section>
+
+		<section>
+			<h2>Verbraucher­streit­beilegung/Universal-Schlichtungs­stelle</h2>
+			<p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.legal-content {
+		max-width: 800px;
+		margin: 0 auto;
+		line-height: 1.6;
+	}
+	section {
+		margin-bottom: 2rem;
+	}
+	h2 {
+		font-size: 1.25rem;
+		margin-top: 1.5rem;
+	}
+</style>
