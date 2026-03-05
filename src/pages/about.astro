@@ -7,34 +7,44 @@ const experience = (await getCollection('experience')).sort(
 );
 
 const skills = [
-  'Java',
-  'TypeScript',
-  'JavaScript',
-  'Python',
-  'C#',
-  'ASP.NET Core',
-  'React',
-  'Flutter',
-  'Swift',
-  'REST',
-  'GraphQL',
-  'MQTT',
-  'Node.js',
-  'MongoDB',
-  'SQL',
-  'Git',
-  'Docker',
-  'Kubernetes',
-  'Helm',
-  'OpenShift',
-  'Grafana',
-  'Chaos Engineering',
-  'Artificial Intelligence (AI)',
-  'Large Language Models (LLM)',
-  'Google Cloud Platform (GCP)',
-  'Microsoft Azure',
-  'Agile Methodologies',
-  'SCRUM',
+  { name: 'Java', category: 'languages' },
+  { name: 'TypeScript', category: 'languages' },
+  { name: 'JavaScript', category: 'languages' },
+  { name: 'Python', category: 'languages' },
+  { name: 'C#', category: 'languages' },
+  { name: 'Swift', category: 'languages' },
+  { name: 'ASP.NET Core', category: 'frameworks' },
+  { name: 'React', category: 'frameworks' },
+  { name: 'Flutter', category: 'frameworks' },
+  { name: 'Node.js', category: 'frameworks' },
+  { name: 'REST', category: 'data-api' },
+  { name: 'GraphQL', category: 'data-api' },
+  { name: 'MQTT', category: 'data-api' },
+  { name: 'MongoDB', category: 'data-api' },
+  { name: 'SQL', category: 'data-api' },
+  { name: 'Git', category: 'cloud-devops' },
+  { name: 'Docker', category: 'cloud-devops' },
+  { name: 'Kubernetes', category: 'cloud-devops' },
+  { name: 'Helm', category: 'cloud-devops' },
+  { name: 'OpenShift', category: 'cloud-devops' },
+  { name: 'Grafana', category: 'cloud-devops' },
+  { name: 'Chaos Engineering', category: 'cloud-devops' },
+  { name: 'Google Cloud Platform (GCP)', category: 'cloud-devops' },
+  { name: 'Microsoft Azure', category: 'cloud-devops' },
+  { name: 'Artificial Intelligence (AI)', category: 'ai' },
+  { name: 'Large Language Models (LLM)', category: 'ai' },
+  { name: 'Agile Methodologies', category: 'others' },
+  { name: 'SCRUM', category: 'others' },
+];
+
+const categories = [
+  { id: 'all', name: 'All' },
+  { id: 'languages', name: 'Languages' },
+  { id: 'frameworks', name: 'Frameworks' },
+  { id: 'cloud-devops', name: 'Cloud & DevOps' },
+  { id: 'data-api', name: 'Data & API' },
+  { id: 'ai', name: 'AI' },
+  { id: 'others', name: 'Others' },
 ];
 ---
 
@@ -116,8 +126,24 @@ const skills = [
     </div>
 
     <h2>IT Skills</h2>
+    <div class="filter-container">
+      {
+        categories.map((cat) => (
+          <button
+            class={`filter-btn ${cat.id === 'all' ? 'active' : ''}`}
+            data-category={cat.id}
+          >
+            {cat.name}
+          </button>
+        ))
+      }
+    </div>
     <ul class="skills-grid">
-      {skills.map((skill) => <li>{skill}</li>)}
+      {
+        skills.map((skill) => (
+          <li data-category={skill.category}>{skill.name}</li>
+        ))
+      }
     </ul>
 
     <h2>Languages</h2>
@@ -200,7 +226,42 @@ const skills = [
     font-size: 0.9rem;
     text-align: center;
     border: 1px solid var(--border-color);
-    transition: background-color 0.3s;
+    transition:
+      background-color 0.3s,
+      opacity 0.3s,
+      transform 0.3s;
+  }
+
+  .skills-grid li.hidden {
+    display: none;
+  }
+
+  .filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-btn {
+    background: var(--tag-bg);
+    border: 1px solid var(--border-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--accent-color);
+  }
+
+  .filter-btn.active {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
   }
 
   .languages {
@@ -222,3 +283,35 @@ const skills = [
     margin-bottom: 0.5rem;
   }
 </style>
+
+<script>
+  function setupFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const skillItems = document.querySelectorAll('.skills-grid li');
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+
+        // Update active button
+        filterButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter skills
+        skillItems.forEach((item) => {
+          if (
+            category === 'all' ||
+            item.getAttribute('data-category') === category
+          ) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+  }
+
+  // Run on initial load and after view transitions
+  document.addEventListener('astro:page-load', setupFilters);
+</script>
