@@ -1,117 +1,43 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import ExperienceItem from '../components/ExperienceItem.astro';
 
 const achievements = (await getCollection('achievements')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+  });
+};
 ---
 
 <Layout title="Achievements | Manuel Klettner">
   <h1>Achievements</h1>
   <p>Academic degrees and certifications</p>
 
-  <div class="list">
+  <div class="timeline">
     {
       achievements.map((achievement) => (
-        <div class="item">
-          <div class="meta">
-            <span class="date">
-              {achievement.data.date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-              })}
-            </span>
-            <span class="type-badge" data-type={achievement.data.type}>
-              {achievement.data.type}
-            </span>
-          </div>
-          <div class="content">
-            <h3>{achievement.data.title}</h3>
-            {achievement.data.organization && (
-              <p class="org">{achievement.data.organization}</p>
-            )}
-            <div class="details">{achievement.body}</div>
-          </div>
-        </div>
+        <ExperienceItem
+          title={achievement.data.title}
+          company={achievement.data.organization || ''}
+          period={formatDate(achievement.data.date)}
+          description={achievement.body}
+          badge={achievement.data.type}
+          badgeType={achievement.data.type}
+          layout="side"
+        />
       ))
     }
   </div>
 </Layout>
 
 <style>
-  .list {
+  .timeline {
     margin-top: 3rem;
-  }
-
-  .item {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-bottom: 4rem;
-  }
-
-  @media (min-width: 640px) {
-    .item {
-      grid-template-columns: 200px 1fr;
-    }
-  }
-
-  .meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .date {
-    font-weight: 600;
-    color: var(--secondary-text);
-    font-size: 0.9rem;
-  }
-
-  .type-badge {
-    align-self: flex-start;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    background: var(--tag-bg);
-    color: var(--secondary-text);
-    padding: 0.1rem 0.5rem;
-    border-radius: 4px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    transition:
-      background-color 0.3s,
-      color 0.3s;
-  }
-
-  .type-badge[data-type='academic'] {
-    background: var(--badge-academic-bg);
-    color: var(--badge-academic-text);
-  }
-  .type-badge[data-type='certification'] {
-    background: var(--badge-cert-bg);
-    color: var(--badge-cert-text);
-  }
-  .type-badge[data-type='international'] {
-    background: var(--badge-intl-bg);
-    color: var(--badge-intl-text);
-  }
-
-  .org {
-    font-weight: 600;
-    margin-top: -0.5rem;
-    color: var(--text-color);
-    font-size: 1.1rem;
-  }
-
-  .details {
-    margin-top: 0.5rem;
-    color: var(--secondary-text);
-    font-size: 0.95rem;
-  }
-
-  h3 {
-    margin-top: 0;
-    font-size: 1.4rem;
   }
 </style>
