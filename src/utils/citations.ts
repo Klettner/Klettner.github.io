@@ -29,13 +29,17 @@ export async function getCitationCount(
 
     const data = await response.json();
     return data.citationCount ?? null;
-  } catch (error: any) {
-    if (error.name === 'TimeoutError' || error.name === 'AbortError') {
+  } catch (error: unknown) {
+    if (
+      error instanceof Error &&
+      (error.name === 'TimeoutError' || error.name === 'AbortError')
+    ) {
       console.error(`Timeout fetching citation count for arXiv:${arxivId}`);
     } else {
+      const message = error instanceof Error ? error.message : String(error);
       console.error(
         `Error fetching citation count for arXiv:${arxivId}:`,
-        error.message || error
+        message
       );
     }
     return null;
