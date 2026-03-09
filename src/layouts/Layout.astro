@@ -71,12 +71,14 @@ const socialImageURL = new URL(image, Astro.site);
   </head>
   <body>
     <header>
-      <nav>
+      <nav id="main-nav">
         <a href="/" class="site-title">Manuel Klettner</a>
         <div class="links">
           <a href="/projects/">Projects</a>
           <a href="/achievements/">Achievements</a>
           <a href="/about/">About</a>
+        </div>
+        <div class="nav-controls">
           <button id="theme-toggle" aria-label="Toggle dark mode">
             <svg
               class="sun"
@@ -125,6 +127,46 @@ const socialImageURL = new URL(image, Astro.site);
               stroke-linejoin="round"
               ><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
               ></path></svg
+            >
+          </button>
+          <button
+            id="menu-toggle"
+            class="menu-toggle"
+            aria-label="Toggle navigation menu"
+          >
+            <svg
+              class="menu-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><line x1="3" y1="12" x2="21" y2="12"></line><line
+                x1="3"
+                y1="6"
+                x2="21"
+                y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg
+            >
+            <svg
+              class="close-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><line x1="18" y1="6" x2="6" y2="18"></line><line
+                x1="6"
+                y1="6"
+                x2="18"
+                y2="18"></line></svg
             >
           </button>
         </div>
@@ -184,8 +226,29 @@ const socialImageURL = new URL(image, Astro.site);
         }
       }
 
+      function setupMenuToggle() {
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('main-nav');
+        if (menuToggle && nav) {
+          menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('menu-open');
+          });
+
+          // Close menu when clicking a link
+          const links = nav.querySelectorAll('.links a');
+          links.forEach((link) => {
+            link.addEventListener('click', () => {
+              nav.classList.remove('menu-open');
+            });
+          });
+        }
+      }
+
       // Run on every page load
-      document.addEventListener('astro:page-load', setupThemeToggle);
+      document.addEventListener('astro:page-load', () => {
+        setupThemeToggle();
+        setupMenuToggle();
+      });
 
       // Prevent flash by copying theme to new document before swap
       document.addEventListener('astro:before-swap', (ev) => {
@@ -272,6 +335,7 @@ const socialImageURL = new URL(image, Astro.site);
   header {
     border-bottom: 1px solid var(--border-color);
     padding: 1rem 0;
+    position: relative;
   }
 
   nav {
@@ -288,6 +352,7 @@ const socialImageURL = new URL(image, Astro.site);
     font-weight: 700;
     text-decoration: none;
     color: var(--text-color);
+    z-index: 101;
   }
 
   .links {
@@ -303,7 +368,15 @@ const socialImageURL = new URL(image, Astro.site);
     transition: color 0.2s;
   }
 
-  #theme-toggle {
+  .nav-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    z-index: 101;
+  }
+
+  #theme-toggle,
+  .menu-toggle {
     background: none;
     border: 1px solid var(--border-color);
     color: var(--text-color);
@@ -318,8 +391,60 @@ const socialImageURL = new URL(image, Astro.site);
       border-color 0.2s;
   }
 
-  #theme-toggle:hover {
+  #theme-toggle:hover,
+  .menu-toggle:hover {
     background-color: var(--border-color);
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .menu-toggle .close-icon {
+    display: none;
+  }
+
+  nav.menu-open .menu-toggle .menu-icon {
+    display: none;
+  }
+
+  nav.menu-open .menu-toggle .close-icon {
+    display: block;
+  }
+
+  @media (max-width: 700px) {
+    .menu-toggle {
+      display: flex;
+    }
+
+    .links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: var(--bg-color);
+      flex-direction: column;
+      gap: 0;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.5rem 0;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    nav.menu-open .links {
+      display: flex;
+    }
+
+    .links a {
+      padding: 1rem 1.5rem;
+      width: 100%;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .links a:last-child {
+      border-bottom: none;
+    }
   }
 
   #theme-toggle .sun {
