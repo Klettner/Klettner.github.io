@@ -28,6 +28,7 @@ const achievementsCollection = defineCollection({
       'other',
     ]),
     link: z.string().url().optional(),
+    arxivId: z.string().optional(),
   }),
 });
 

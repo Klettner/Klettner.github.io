@@ -12,6 +12,7 @@ interface Props {
   badgeType?: string;
   layout?: 'default' | 'side';
   link?: string;
+  citations?: number | null;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
   badgeType,
   layout = 'default',
   link,
+  citations,
 } = Astro.props;
 
 const formatDate = (date: Date | string | undefined) => {
@@ -48,11 +50,13 @@ const displayPeriod =
     layout === 'side' && (
       <div class="timeline-meta">
         <span class="period">{displayPeriod}</span>
-        {badge && (
-          <span class="type-badge" data-type={badgeType || badge}>
-            {badge}
-          </span>
-        )}
+        <div class="meta-badges">
+          {badge && (
+            <span class="type-badge" data-type={badgeType || badge}>
+              {badge}
+            </span>
+          )}
+        </div>
       </div>
     )
   }
@@ -64,13 +68,15 @@ const displayPeriod =
       <div class="title-group">
         <div class="title-row">
           <h3>{title}</h3>
-          {
-            layout === 'default' && badge && (
-              <span class="type-badge" data-type={badgeType || badge}>
-                {badge}
-              </span>
-            )
-          }
+          <div class="header-badges">
+            {
+              layout === 'default' && badge && (
+                <span class="type-badge" data-type={badgeType || badge}>
+                  {badge}
+                </span>
+              )
+            }
+          </div>
         </div>
         <span class="company">{company}</span>
         {location && <span class="location">| {location}</span>}
@@ -78,31 +84,54 @@ const displayPeriod =
       {layout === 'default' && <span class="period">{displayPeriod}</span>}
     </div>
     <div class="description" set:html={description} />
+
     {
-      link && (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-btn"
-        >
-          View Details
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-            <polyline points="15 3 21 3 21 9" />
-            <line x1="10" y1="14" x2="21" y2="3" />
-          </svg>
-        </a>
+      (link || (citations && citations > 0)) && (
+        <div class="timeline-footer">
+          {link && (
+            <a
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link-btn"
+            >
+              View Details
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </a>
+          )}
+          {citations && citations > 0 && (
+            <div class="citations-count" title="Citations on Semantic Scholar">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+              <span>{citations} Citations</span>
+            </div>
+          )}
+        </div>
       )
     }
   </div>
@@ -195,6 +224,20 @@ const displayPeriod =
     background: var(--tag-bg);
     padding: 0.2rem 0.6rem;
     border-radius: 4px;
+  }
+
+  .meta-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+  }
+
+  .header-badges {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
 
   .type-badge {
@@ -291,11 +334,19 @@ const displayPeriod =
     line-height: 1.6;
   }
 
+  .timeline-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+  }
+
   .link-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    margin-top: 1rem;
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--accent-color);
@@ -305,6 +356,20 @@ const displayPeriod =
 
   .link-btn:hover {
     color: var(--text-color);
+  }
+
+  .citations-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary-text);
+  }
+
+  .citations-count svg {
+    color: var(--accent-color);
+    opacity: 0.8;
   }
 
   @media (max-width: 768px) {

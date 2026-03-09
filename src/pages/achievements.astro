@@ -2,9 +2,21 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import ExperienceItem from '../components/ExperienceItem.astro';
+import { getCitationCount } from '../utils/citations';
 
 const achievements = (await getCollection('achievements')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+// Fetch citation counts for publications with an arxivId
+const achievementsWithCitations = await Promise.all(
+  achievements.map(async (achievement) => {
+    let citations = null;
+    if (achievement.data.arxivId) {
+      citations = await getCitationCount(achievement.data.arxivId);
+    }
+    return { ...achievement, citations };
+  })
 );
 
 const formatDate = (date: Date) => {
@@ -21,7 +33,7 @@ const formatDate = (date: Date) => {
 
   <div class="timeline">
     {
-      achievements.map((achievement) => (
+      achievementsWithCitations.map((achievement) => (
         <ExperienceItem
           title={achievement.data.title}
           company={achievement.data.organization || ''}
@@ -30,6 +42,7 @@ const formatDate = (date: Date) => {
           badge={achievement.data.type}
           badgeType={achievement.data.type}
           link={achievement.data.link}
+          citations={achievement.citations}
           layout="side"
         />
       ))
