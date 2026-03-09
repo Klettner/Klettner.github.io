@@ -24,8 +24,10 @@ const achievementsCollection = defineCollection({
       'certification',
       'award',
       'international',
+      'publication',
       'other',
     ]),
+    link: z.string().url().optional(),
   }),
 });
 

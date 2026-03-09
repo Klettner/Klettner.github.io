@@ -266,6 +266,10 @@ const achievements = (await getCollection('achievements'))
     background: var(--badge-intl-bg);
     color: var(--badge-intl-text);
   }
+  .type-badge[data-type='publication'] {
+    background: var(--badge-pub-bg);
+    color: var(--badge-pub-text);
+  }
 
   .view-all {
     display: inline-block;

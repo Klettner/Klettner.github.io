@@ -11,6 +11,7 @@ interface Props {
   badge?: string;
   badgeType?: string;
   layout?: 'default' | 'side';
+  link?: string;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   badge,
   badgeType,
   layout = 'default',
+  link,
 } = Astro.props;
 
 const formatDate = (date: Date | string | undefined) => {
@@ -75,7 +77,34 @@ const displayPeriod =
       </div>
       {layout === 'default' && <span class="period">{displayPeriod}</span>}
     </div>
-    <p class="description" set:html={description} />
+    <div class="description" set:html={description} />
+    {
+      link && (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-btn"
+        >
+          View Details
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+        </a>
+      )
+    }
   </div>
 </div>
 
@@ -192,6 +221,10 @@ const displayPeriod =
     background: var(--badge-intl-bg);
     color: var(--badge-intl-text);
   }
+  .type-badge[data-type='publication'] {
+    background: var(--badge-pub-bg);
+    color: var(--badge-pub-text);
+  }
 
   .timeline-content {
     background: var(--card-bg);
@@ -256,6 +289,22 @@ const displayPeriod =
     color: var(--text-color);
     font-size: 0.95rem;
     line-height: 1.6;
+  }
+
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .link-btn:hover {
+    color: var(--text-color);
   }
 
   @media (max-width: 768px) {
