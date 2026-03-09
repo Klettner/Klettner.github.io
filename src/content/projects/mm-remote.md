@@ -7,6 +7,8 @@ link: 'https://github.com/Klettner/MM-Remote'
 image: '../../assets/images/mm-remote.png'
 ---
 
+![GitHub downloads](https://img.shields.io/github/downloads/Klettner/MM-Remote/total?style=flat-square)
+
 MM-Remote is a multi-platform application designed to control a Smart Mirror remotely. It integrates seamlessly with various MagicMirror modules while also providing the flexibility to create custom commands for tailored functionality.
 
 ### Core Features
