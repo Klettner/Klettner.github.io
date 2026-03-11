@@ -18,7 +18,7 @@ gallery:
   - '../../assets/images/smart-store-electronics.jpg'
 ---
 
-SmartStore was developed in collaboration with **PERI** during the TechChallenge organized by **UnternehmerTUM**.The objective was to digitize construction site logistics without adding extra workload for on-site workers.
+SmartStore was developed in collaboration with **PERI** during the TechChallenge organized by **UnternehmerTUM**. The objective was to digitize construction site logistics without adding extra workload for on-site workers.
 
 ### The Problem
 

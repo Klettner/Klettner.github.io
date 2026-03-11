@@ -1,0 +1,33 @@
+name: Sync Citations
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Every Sunday at 00:00
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run sync script
+        run: npx tsx scripts/sync-citations.ts
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/citations.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update citation counts"
+            git push
+          else
+            echo "No citation counts changed."
+          fi
