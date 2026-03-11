@@ -4,7 +4,8 @@ description: 'Android, Linux, and Windows application for controlling a smart mi
 publishDate: 2020-01-01
 tags: ['Flutter', 'Dart', 'Android', 'Linux', 'Windows']
 link: 'https://github.com/Klettner/MM-Remote'
-image: '../../assets/images/mm-remote.png'
+gallery:
+  - '../../assets/images/mm-remote.png'
 ---
 
 ![GitHub downloads](https://img.shields.io/github/downloads/Klettner/MM-Remote/total?style=flat-square)

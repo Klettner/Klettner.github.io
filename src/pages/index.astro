@@ -49,9 +49,9 @@ const achievements = (await getCollection('achievements'))
               class="card-link"
               aria-label={`View details for ${project.data.title}`}
             >
-              {project.data.image && (
+              {project.data.gallery && (
                 <Image
-                  src={project.data.image}
+                  src={project.data.gallery[0]}
                   alt={project.data.title}
                   class="project-image"
                 />
