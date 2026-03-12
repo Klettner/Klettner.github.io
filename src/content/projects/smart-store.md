@@ -1,5 +1,5 @@
 ---
-title: 'SmartStore'
+title: 'Smart Store'
 description: 'Modular IoT pallet system for real-time construction site inventory tracking, developed in collaboration with PERI.'
 publishDate: 2022-07-01
 tags:
@@ -18,7 +18,7 @@ gallery:
   - '../../assets/images/smart-store-electronics.jpg'
 ---
 
-SmartStore was developed in collaboration with **PERI** during the TechChallenge organized by **UnternehmerTUM**. The objective was to digitize construction site logistics without adding extra workload for on-site workers.
+Smart Store was developed in collaboration with **PERI** during the TechChallenge organized by **UnternehmerTUM**. The objective was to digitize construction site logistics without adding extra workload for on-site workers.
 
 ### The Problem
 
