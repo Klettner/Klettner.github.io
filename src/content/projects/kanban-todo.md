@@ -4,9 +4,9 @@ description: 'Android application for collaborative task management, offering bo
 publishDate: 2020-06-01
 tags: ['Flutter', 'Dart', 'Android', 'Cloud Sync']
 gallery:
-  - '../../assets/images/kanban-todo-reoccuring.png'
-  - '../../assets/images/kanban-todo.png'
   - '../../assets/images/kanban-todo-list.png'
+  - '../../assets/images/kanban-todo.png'
+  - '../../assets/images/kanban-todo-reoccuring.png'
 ---
 
 Kanban-ToDo is a versatile task management application designed to handle everything from simple grocery lists to complex event organization. It provides a dual interface: a streamlined ToDo list and a structured Kanban board.
