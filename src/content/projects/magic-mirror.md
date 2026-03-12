@@ -5,6 +5,7 @@ publishDate: 2019-06-01
 tags: ['Raspberry Pi', 'Linux', 'IoT', 'Sensors']
 gallery:
   - '../../assets/images/magic-mirror.jpg'
+  - '../../assets/images/magic-mirror-ui.jpg'
 ---
 
 This project is a smart mirror based on Michael Teeuw's MagicMirror open-source platform. It transforms a standard mirror into an information hub by placing a monitor behind a one-way mirror and using a Raspberry Pi to control the interface.
