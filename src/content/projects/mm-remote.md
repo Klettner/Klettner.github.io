@@ -1,7 +1,7 @@
 ---
 title: 'MM-Remote'
 description: 'Android, Linux, and Windows application for controlling a smart mirror remotely. Open-sourced on GitHub.'
-publishDate: 2020-01-01
+publishDate: 2021-01-01
 tags: ['Flutter', 'Dart', 'Android', 'Linux', 'Windows']
 link: 'https://github.com/Klettner/MM-Remote'
 gallery:
