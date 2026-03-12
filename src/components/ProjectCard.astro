@@ -1,0 +1,215 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import ImageGallery from './ImageGallery.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  variant?: 'summary' | 'detail';
+}
+
+const { project, variant = 'detail' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'card',
+    variant === 'summary' ? 'card-summary' : 'card-detail',
+    'animate-on-scroll',
+  ]}
+  id={variant === 'detail' ? project.slug : undefined}
+>
+  {
+    variant === 'summary' ? (
+      <>
+        <a
+          href={`/projects/#${project.slug}`}
+          class="card-link"
+          aria-label={`View details for ${project.data.title}`}
+        >
+          {project.data.gallery && (
+            <Image
+              src={project.data.gallery[0]}
+              alt={project.data.title}
+              class="project-image"
+            />
+          )}
+          <h3>{project.data.title}</h3>
+          <p>{project.data.description}</p>
+          <div class="tags">
+            {project.data.tags?.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </a>
+        {project.data.link && (
+          <a href={project.data.link} target="_blank" class="link">
+            View on GitHub &rarr;
+          </a>
+        )}
+      </>
+    ) : (
+      <>
+        {project.data.gallery && (
+          <ImageGallery
+            images={project.data.gallery}
+            title={project.data.title}
+          />
+        )}
+        <div class="card-header">
+          <h3>{project.data.title}</h3>
+          <div class="tags">
+            {project.data.tags?.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+        <p class="description">{project.data.description}</p>
+        {project.data.link && (
+          <a href={project.data.link} target="_blank" class="link">
+            View on GitHub &rarr;
+          </a>
+        )}
+        <div class="content">
+          <slot />
+        </div>
+      </>
+    )
+  }
+</div>
+
+<style>
+  /* Common Styles */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    background: var(--tag-bg);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    color: var(--secondary-text);
+    transition: background-color 0.3s;
+  }
+
+  .link {
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+  }
+
+  .card h3 {
+    margin-top: 0;
+  }
+
+  /* Summary Card Styles (Homepage) */
+  .card-summary {
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s,
+      background-color 0.3s;
+    background: var(--card-bg);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card-summary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: var(--card-hover-bg);
+  }
+
+  .card-summary .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1;
+  }
+
+  .card-summary .project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background: var(--image-bg);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+  }
+
+  .card-summary h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-summary .tags {
+    margin: 1rem 0;
+  }
+
+  /* Detail Card Styles (Projects Page) */
+  .card-detail {
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .card-detail:last-child {
+    border-bottom: none;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .card-detail h3 {
+    margin: 0;
+    font-size: 1.75rem;
+  }
+
+  .description {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
+
+  .card-detail .link {
+    margin-bottom: 1.5rem;
+  }
+
+  .content {
+    color: var(--secondary-text);
+    font-size: 0.95rem;
+  }
+
+  .content :global(h3) {
+    font-size: 1.25rem;
+    color: var(--text-color);
+    margin-top: 1.5rem;
+  }
+
+  .content :global(ul) {
+    padding-left: 1.2rem;
+  }
+
+  .content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+  }
+</style>

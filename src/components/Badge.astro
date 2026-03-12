@@ -1,0 +1,47 @@
+---
+interface Props {
+  type?: string;
+  as?: string;
+  class?: string;
+}
+
+const { type, as: Element = 'span', class: className } = Astro.props;
+---
+
+<Element class:list={['badge', className]} data-type={type}>
+  <slot />
+</Element>
+
+<style>
+  .badge {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    background: var(--tag-bg);
+    color: var(--secondary-text);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .badge[data-type='academic'] {
+    background: var(--badge-academic-bg);
+    color: var(--badge-academic-text);
+  }
+  .badge[data-type='certification'] {
+    background: var(--badge-cert-bg);
+    color: var(--badge-cert-text);
+  }
+  .badge[data-type='international'] {
+    background: var(--badge-intl-bg);
+    color: var(--badge-intl-text);
+  }
+  .badge[data-type='publication'] {
+    background: var(--badge-pub-bg);
+    color: var(--badge-pub-text);
+  }
+</style>

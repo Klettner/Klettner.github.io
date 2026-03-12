@@ -1,4 +1,6 @@
 ---
+import Badge from './Badge.astro';
+
 interface Props {
   title: string;
   company: string;
@@ -58,11 +60,7 @@ const displayPeriod =
       <div class="timeline-meta">
         <span class="period">{displayPeriod}</span>
         <div class="meta-badges">
-          {badge && (
-            <span class="type-badge" data-type={badgeType || badge}>
-              {badge}
-            </span>
-          )}
+          {badge && <Badge type={badgeType || badge}>{badge}</Badge>}
         </div>
       </div>
     )
@@ -78,9 +76,7 @@ const displayPeriod =
           <div class="header-badges">
             {
               layout === 'default' && badge && (
-                <span class="type-badge" data-type={badgeType || badge}>
-                  {badge}
-                </span>
+                <Badge type={badgeType || badge}>{badge}</Badge>
               )
             }
           </div>
@@ -245,35 +241,6 @@ const displayPeriod =
     align-items: center;
     gap: 0.5rem;
     flex-wrap: wrap;
-  }
-
-  .type-badge {
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    background: var(--tag-bg);
-    color: var(--secondary-text);
-    padding: 0.1rem 0.4rem;
-    border-radius: 4px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    width: fit-content;
-  }
-
-  .type-badge[data-type='academic'] {
-    background: var(--badge-academic-bg);
-    color: var(--badge-academic-text);
-  }
-  .type-badge[data-type='certification'] {
-    background: var(--badge-cert-bg);
-    color: var(--badge-cert-text);
-  }
-  .type-badge[data-type='international'] {
-    background: var(--badge-intl-bg);
-    color: var(--badge-intl-text);
-  }
-  .type-badge[data-type='publication'] {
-    background: var(--badge-pub-bg);
-    color: var(--badge-pub-text);
   }
 
   .timeline-content {

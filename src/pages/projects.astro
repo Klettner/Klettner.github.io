@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import ImageGallery from '../components/ImageGallery.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 
 const projects = (await getCollection('projects')).sort(
   (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
@@ -19,32 +19,9 @@ const projects = (await getCollection('projects')).sort(
       projects.map(async (project) => {
         const { Content } = await project.render();
         return (
-          <div class="card animate-on-scroll" id={project.slug}>
-            {project.data.gallery && (
-              <ImageGallery
-                images={project.data.gallery}
-                title={project.data.title}
-              />
-            )}
-            <div class="card-header">
-              <h3>{project.data.title}</h3>
-              <div class="tags">
-                {project.data.tags?.map((tag) => (
-                  <span class="tag">{tag}</span>
-                ))}
-              </div>
-            </div>
-            <p class="description">{project.data.description}</p>
-            {project.data.link && (
-              <a href={project.data.link} target="_blank" class="link">
-                View on GitHub &rarr;
-              </a>
-            )}
-
-            <div class="content">
-              <Content />
-            </div>
-          </div>
+          <ProjectCard project={project} variant="detail">
+            <Content />
+          </ProjectCard>
         );
       })
     }
@@ -57,80 +34,5 @@ const projects = (await getCollection('projects')).sort(
     flex-direction: column;
     gap: 4rem;
     margin-top: 3rem;
-  }
-
-  .card {
-    padding-bottom: 4rem;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .card:last-child {
-    border-bottom: none;
-  }
-
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .card h3 {
-    margin: 0;
-    font-size: 1.75rem;
-  }
-
-  .description {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .tag {
-    font-size: 0.75rem;
-    background: var(--tag-bg);
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    color: var(--secondary-text);
-    transition: background-color 0.3s;
-  }
-
-  .link {
-    display: inline-block;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .content {
-    color: var(--secondary-text);
-    font-size: 0.95rem;
-  }
-
-  .content :global(h3) {
-    font-size: 1.25rem;
-    color: var(--text-color);
-    margin-top: 1.5rem;
-  }
-
-  .content :global(ul) {
-    padding-left: 1.2rem;
-  }
-
-  .content :global(img) {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 1.5rem 0;
-    border: 1px solid var(--border-color);
   }
 </style>
