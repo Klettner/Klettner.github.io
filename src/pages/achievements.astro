@@ -22,10 +22,10 @@ const formatDate = (date: Date) => {
 ---
 
 <Layout title="Achievements | Manuel Klettner">
-  <h1>Achievements</h1>
-  <p>Academic degrees and certifications</p>
+  <h1 class="animate-in">Achievements</h1>
+  <p class="animate-in">Academic degrees and certifications</p>
 
-  <div class="timeline">
+  <div class="timeline stagger-children">
     {
       achievements.map((achievement) => (
         <ExperienceItem
@@ -42,6 +42,7 @@ const formatDate = (date: Date) => {
               : null
           }
           layout="side"
+          class="animate-on-scroll"
         />
       ))
     }

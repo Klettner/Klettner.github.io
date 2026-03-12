@@ -9,15 +9,17 @@ const projects = (await getCollection('projects')).sort(
 ---
 
 <Layout title="Projects | Manuel Klettner">
-  <h1>Projects</h1>
-  <p>A selection of my personal projects and open-source contributions.</p>
+  <h1 class="animate-in">Projects</h1>
+  <p class="animate-in">
+    A selection of my personal projects and open-source contributions.
+  </p>
 
-  <div class="grid">
+  <div class="grid stagger-children">
     {
       projects.map(async (project) => {
         const { Content } = await project.render();
         return (
-          <div class="card" id={project.slug}>
+          <div class="card animate-on-scroll" id={project.slug}>
             {project.data.gallery && (
               <ImageGallery
                 images={project.data.gallery}

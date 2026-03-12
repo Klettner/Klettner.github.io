@@ -52,24 +52,26 @@ const categories = [
 ---
 
 <Layout title="About | Manuel Klettner">
-  <h1>About Me</h1>
+  <h1 class="animate-in">About Me</h1>
 
   <div class="content">
-    <p>
-      I am a Software Engineer at <strong>Rohde & Schwarz</strong> with a focus on
-      building robust, scalable, and innovative digital solutions. I hold a Master
-      of Science in Information Systems from the Technical University of Munich (TUM),
-      where I graduated with distinction.
-    </p>
+    <div class="animate-in">
+      <p>
+        I am a Software Engineer at <strong>Rohde & Schwarz</strong> with a focus
+        on building robust, scalable, and innovative digital solutions. I hold a Master
+        of Science in Information Systems from the Technical University of Munich
+        (TUM), where I graduated with distinction.
+      </p>
 
-    <p>
-      My expertise spans across cloud-native architectures, DevOps and the
-      emerging field of Large Language Models (LLMs). I am driven by the
-      challenge of solving complex problems through elegant software design.
-    </p>
+      <p>
+        My expertise spans across cloud-native architectures, DevOps and the
+        emerging field of Large Language Models (LLMs). I am driven by the
+        challenge of solving complex problems through elegant software design.
+      </p>
+    </div>
 
-    <h2>Practical Experience</h2>
-    <div class="timeline">
+    <h2 class="animate-on-scroll">Practical Experience</h2>
+    <div class="timeline stagger-children">
       {
         experience.map((exp) => (
           <ExperienceItem
@@ -80,29 +82,32 @@ const categories = [
             endDate={exp.data.endDate}
             current={exp.data.current}
             description={exp.data.description}
+            class="animate-on-scroll"
           />
         ))
       }
     </div>
 
-    <h2>Education</h2>
-    <div class="timeline">
+    <h2 class="animate-on-scroll">Education</h2>
+    <div class="timeline stagger-children">
       <ExperienceItem
         title="Master of Science, Information Systems"
         company="Technical University of Munich"
         period="2022 - 2023"
         description="<strong>Thesis:</strong> Augmenting Knowledge-Based Conversational Search Systems With Large Language Models (Grade: 1.0)"
+        class="animate-on-scroll"
       />
       <ExperienceItem
         title="Bachelor of Science, Information Systems"
         company="Technical University of Munich"
         period="2018 - 2022"
         description="Among the top 9% in field of study.<br /><strong>Thesis:</strong> Context-sensitive Requirements Search in Natural Language Specifications (Grade: 1.0)"
+        class="animate-on-scroll"
       />
     </div>
 
-    <h2>IT Skills</h2>
-    <div class="filter-container">
+    <h2 class="animate-on-scroll">IT Skills</h2>
+    <div class="filter-container animate-on-scroll">
       {
         categories.map((cat) => (
           <button
@@ -114,7 +119,7 @@ const categories = [
         ))
       }
     </div>
-    <ul class="skills-grid">
+    <ul class="skills-grid animate-on-scroll">
       {
         skills.map((skill) => (
           <li data-category={skill.category}>{skill.name}</li>
@@ -122,28 +127,31 @@ const categories = [
       }
     </ul>
 
-    <h2>Languages</h2>
-    <div class="languages">
+    <h2 class="animate-on-scroll">Languages</h2>
+    <div class="languages animate-on-scroll">
       <p><strong>German:</strong> Native</p>
       <p><strong>English:</strong> Full professional proficiency</p>
       <p><strong>Chinese:</strong> Elementary proficiency</p>
       <p><strong>French:</strong> Elementary proficiency</p>
     </div>
 
-    <h2>Contact</h2>
-    <p>Feel free to reach out to me.</p>
-    <ul class="contact-links">
-      <li>
-        LinkedIn: <a href="https://www.linkedin.com/in/klettner" target="_blank"
-          >linkedin.com/in/klettner</a
-        >
-      </li>
-      <li>
-        GitHub: <a href="https://github.com/Klettner" target="_blank"
-          >github.com/Klettner</a
-        >
-      </li>
-    </ul>
+    <h2 class="animate-on-scroll">Contact</h2>
+    <div class="animate-on-scroll">
+      <p>Feel free to reach out to me.</p>
+      <ul class="contact-links">
+        <li>
+          LinkedIn: <a
+            href="https://www.linkedin.com/in/klettner"
+            target="_blank">linkedin.com/in/klettner</a
+          >
+        </li>
+        <li>
+          GitHub: <a href="https://github.com/Klettner" target="_blank"
+            >github.com/Klettner</a
+          >
+        </li>
+      </ul>
+    </div>
   </div>
 </Layout>
 

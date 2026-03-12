@@ -14,7 +14,7 @@ const achievements = (await getCollection('achievements'))
 ---
 
 <Layout title="Manuel Klettner | Software Engineer">
-  <section class="hero">
+  <section class="hero animate-in">
     <div class="hero-content">
       <Image
         src={profileImage}
@@ -38,12 +38,12 @@ const achievements = (await getCollection('achievements'))
     </div>
   </section>
 
-  <section class="section">
+  <section class="section animate-on-scroll">
     <h2>Personal Projects</h2>
-    <div class="grid">
+    <div class="grid stagger-children">
       {
         projects.map((project) => (
-          <div class="card">
+          <div class="card animate-on-scroll">
             <a
               href={`/projects/#${project.slug}`}
               class="card-link"
@@ -76,12 +76,12 @@ const achievements = (await getCollection('achievements'))
     <a href="/projects/" class="view-all">View all projects &rarr;</a>
   </section>
 
-  <section class="section">
+  <section class="section animate-on-scroll">
     <h2>Recent Achievements</h2>
-    <ul class="achievement-list">
+    <ul class="achievement-list stagger-children">
       {
         achievements.map((achievement) => (
-          <li>
+          <li class="animate-on-scroll">
             <span class="date">
               {achievement.data.date.toLocaleDateString('en-US', {
                 year: 'numeric',
