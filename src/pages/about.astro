@@ -51,7 +51,10 @@ const categories = [
 ];
 ---
 
-<Layout title="About | Manuel Klettner">
+<Layout
+  title="About | Manuel Klettner"
+  description="Learn about my background as a Software Engineer, my M.Sc. in Information Systems from TUM, and my technical skills in Cloud, DevOps, and AI."
+>
   <h1 class="animate-in">About Me</h1>
 
   <div class="content">
@@ -82,6 +85,8 @@ const categories = [
             endDate={exp.data.endDate}
             current={exp.data.current}
             description={exp.data.description}
+            type="work"
+            layout="side"
             class="animate-on-scroll"
           />
         ))
@@ -93,15 +98,21 @@ const categories = [
       <ExperienceItem
         title="Master of Science, Information Systems"
         company="Technical University of Munich"
-        period="2022 - 2023"
+        startDate="2022-04-01"
+        endDate="2023-10-31"
         description="<strong>Thesis:</strong> Augmenting Knowledge-Based Conversational Search Systems With Large Language Models (Grade: 1.0)"
+        type="education"
+        layout="side"
         class="animate-on-scroll"
       />
       <ExperienceItem
         title="Bachelor of Science, Information Systems"
         company="Technical University of Munich"
-        period="2018 - 2022"
+        startDate="2018-10-01"
+        endDate="2022-03-31"
         description="Among the top 9% in field of study.<br /><strong>Thesis:</strong> Context-sensitive Requirements Search in Natural Language Specifications (Grade: 1.0)"
+        type="education"
+        layout="side"
         class="animate-on-scroll"
       />
     </div>

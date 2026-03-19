@@ -21,7 +21,10 @@ const formatDate = (date: Date) => {
 };
 ---
 
-<Layout title="Achievements | Manuel Klettner">
+<Layout
+  title="Achievements | Manuel Klettner"
+  description="Discover my academic achievements, certifications, awards, and publications in Information Systems and Software Engineering."
+>
   <h1 class="animate-in">Achievements</h1>
   <p class="animate-in">Academic degrees and certifications</p>
 
@@ -35,6 +38,13 @@ const formatDate = (date: Date) => {
           description={achievement.body}
           badge={achievement.data.type}
           badgeType={achievement.data.type}
+          type={
+            achievement.data.type === 'academic'
+              ? 'education'
+              : achievement.data.type === 'publication'
+                ? 'project'
+                : 'achievement'
+          }
           link={achievement.data.link}
           citations={
             achievement.data.arxivId
