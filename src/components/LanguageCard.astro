@@ -1,0 +1,81 @@
+---
+interface Props {
+  language: string;
+  level: string;
+  class?: string;
+}
+
+const { language, level, class: className } = Astro.props;
+---
+
+<div class:list={['language-card', className]}>
+  <div class="language-info">
+    <span class="language-name">{language}</span>
+    <span class="language-level">{level}</span>
+  </div>
+  <div class="proficiency-bar">
+    <div
+      class="proficiency-fill"
+      style={`width: ${
+        level === 'Native'
+          ? '100%'
+          : level.includes('Full professional')
+            ? '90%'
+            : level.includes('Elementary')
+              ? '20%'
+              : '50%'
+      }`}
+    >
+    </div>
+  </div>
+</div>
+
+<style>
+  .language-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .language-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-color);
+  }
+
+  .language-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+  }
+
+  .language-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-color);
+  }
+
+  .language-level {
+    font-size: 0.8rem;
+    color: var(--secondary-text);
+    font-weight: 500;
+  }
+
+  .proficiency-bar {
+    height: 4px;
+    background: var(--tag-bg);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .proficiency-fill {
+    height: 100%;
+    background: var(--accent-color);
+    border-radius: 2px;
+    transition: width 1s ease-out;
+  }
+</style>

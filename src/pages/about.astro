@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import ExperienceItem from '../components/ExperienceItem.astro';
+import ContactCard from '../components/ContactCard.astro';
+import LanguageCard from '../components/LanguageCard.astro';
 
 const experience = (await getCollection('experience')).sort(
   (a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
@@ -138,30 +140,39 @@ const categories = [
       }
     </ul>
 
-    <h2 class="animate-on-scroll">Languages</h2>
-    <div class="languages animate-on-scroll">
-      <p><strong>German:</strong> Native</p>
-      <p><strong>English:</strong> Full professional proficiency</p>
-      <p><strong>Chinese:</strong> Elementary proficiency</p>
-      <p><strong>French:</strong> Elementary proficiency</p>
-    </div>
+    <div class="footer-grid">
+      <div class="grid-section">
+        <h2 class="animate-on-scroll">Languages</h2>
+        <div class="language-list stagger-children">
+          <LanguageCard
+            language="German"
+            level="Native"
+            class="animate-on-scroll"
+          />
+          <LanguageCard
+            language="English"
+            level="Full professional proficiency"
+            class="animate-on-scroll"
+          />
+          <LanguageCard
+            language="Chinese"
+            level="Elementary proficiency"
+            class="animate-on-scroll"
+          />
+          <LanguageCard
+            language="French"
+            level="Elementary proficiency"
+            class="animate-on-scroll"
+          />
+        </div>
+      </div>
 
-    <h2 class="animate-on-scroll">Contact</h2>
-    <div class="animate-on-scroll">
-      <p>Feel free to reach out to me.</p>
-      <ul class="contact-links">
-        <li>
-          LinkedIn: <a
-            href="https://www.linkedin.com/in/klettner"
-            target="_blank">linkedin.com/in/klettner</a
-          >
-        </li>
-        <li>
-          GitHub: <a href="https://github.com/Klettner" target="_blank"
-            >github.com/Klettner</a
-          >
-        </li>
-      </ul>
+      <div class="grid-section">
+        <h2 class="animate-on-scroll">Contact</h2>
+        <div class="animate-on-scroll">
+          <ContactCard />
+        </div>
+      </div>
     </div>
   </div>
 </Layout>
@@ -222,22 +233,44 @@ const categories = [
   .filter-btn:hover {
     border-color: var(--accent-color);
   }
-
   .filter-btn.active {
     background: var(--accent-color);
     color: white;
     border-color: var(--accent-color);
   }
 
-  .languages {
-    margin-top: 1rem;
-    margin-bottom: 3rem;
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    margin-top: 4rem;
+    margin-left: 0;
+    padding-left: 0;
   }
 
-  .languages p {
-    margin: 0.25rem 0;
+  @media (min-width: 800px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
   }
 
+  .grid-section {
+    margin: 0;
+    padding: 0;
+  }
+
+  .grid-section h2 {
+    margin-top: 0;
+  }
+
+  .language-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
   .contact-links {
     list-style: none;
     padding: 0;
