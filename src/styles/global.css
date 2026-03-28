@@ -14,8 +14,8 @@
   --badge-cert-text: #2e7d32;
   --badge-intl-bg: #fff3e0;
   --badge-intl-text: #e65100;
-  --badge-pub-bg: #e0e7ff;
-  --badge-pub-text: #4338ca;
+  --badge-pub-bg: #fef9c3;
+  --badge-pub-text: #713f12;
   --max-width: 800px;
 }
 
@@ -35,8 +35,8 @@
   --badge-cert-text: #4ade80;
   --badge-intl-bg: #351a05;
   --badge-intl-text: #fb923c;
-  --badge-pub-bg: #1e1b4b;
-  --badge-pub-text: #818cf8;
+  --badge-pub-bg: #453008;
+  --badge-pub-text: #facc15;
 }
 
 * {
