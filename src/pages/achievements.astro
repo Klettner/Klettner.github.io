@@ -35,7 +35,7 @@ const formatDate = (date: Date) => {
           title={achievement.data.title}
           company={achievement.data.organization || ''}
           period={formatDate(achievement.data.date)}
-          description={achievement.body}
+          description={achievement.data.description || ''}
           badge={achievement.data.type}
           badgeType={achievement.data.type}
           type={

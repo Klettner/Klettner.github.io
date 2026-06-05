@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 
@@ -17,7 +17,7 @@ const projects = (await getCollection('projects')).sort(
   <div class="grid stagger-children">
     {
       projects.map(async (project) => {
-        const { Content } = await project.render();
+        const { Content } = await render(project);
         return (
           <ProjectCard project={project} variant="detail">
             <Content />

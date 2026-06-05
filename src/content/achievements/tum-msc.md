@@ -3,6 +3,5 @@ title: 'M.Sc. Information Systems'
 organization: 'Technical University of Munich'
 date: 2023-10-01
 type: 'academic'
+description: 'Completed Master of Science in Information Systems with distinction. Specialized in Software Engineering and AI.'
 ---
-
-Completed Master of Science in Information Systems with distinction. Specialized in Software Engineering and AI.
